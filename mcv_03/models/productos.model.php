@@ -1,41 +1,74 @@
-<?php
-class ProductosModel {
-
-    private $db;
-
-    public function __construct($db) {
-        $this->db = $db;
+<<?php
+require_once('../config/config.php');
+class Productoa
+{
+    public function todos()
+    {
+        $con = new ClaseConectar();
+        $con = $con->ProcedimientoParaConectar();
+        $cadena = "SELECT * FROM `productos`";
+        $datos = mysqli_query($con, $cadena);
+        $con->close();
+        return $datos;
     }
-
-    // Crear producto
-    public function crearProducto($codigo_barras, $nombre_producto, $graba_iva) {
-        $stmt = $this->db->prepare("INSERT INTO productos (Codigo_Barras, Nombre_Producto, Graba_IVA) VALUES (?, ?, ?)");
-        return $stmt->execute([$codigo_barras, $nombre_producto, $graba_iva]);
+    public function uno($idProveedores)
+    {
+        $con = new ClaseConectar();
+        $con = $con->ProcedimientoParaConectar();
+        $cadena = "SELECT * FROM `productos` WHERE `idProductos`=$idProductos";
+        $datos = mysqli_query($con, $cadena);
+        $con->close();
+        return $datos;
     }
-
-    // Leer todos los productos
-    public function obtenerProductos() {
-        $stmt = $this->db->query("SELECT * FROM productos");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function insertar($Codigo_Barras, $Nombre_Producto, $Graba_IVA)
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "INSERT INTO `productos` ( `Codigo_Barras`, `Nombre_Producto`, `Graba_IVA`) VALUES ('$Codigo_Barras','$Nombre_Producto','$Graba_IVA')";
+            if (mysqli_query($con, $cadena)) {
+                return $con->insert_id;
+            } else {
+                return $con->error;
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
     }
-
-    // Leer un solo producto por ID
-    public function obtenerProductoPorId($id) {
-        $stmt = $this->db->prepare("SELECT * FROM productos WHERE idProductos = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+    public function actualizar($idProductos, $Codigo_Barras, $Nombre_Producto, $Graba_IVA)
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "UPDATE `productos` SET `Codigo_Barras`='$Codigo_Barras',`Nombre_Producto`='$Nombre_Producto',`Graba_IVA`='$Graba_IVA' WHERE `idProductos` = $idProductos";
+            if (mysqli_query($con, $cadena)) {
+                return $idProveedores;
+            } else {
+                return $con->error;
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
     }
-
-    // Actualizar producto
-    public function actualizarProducto($id, $codigo_barras, $nombre_producto, $graba_iva) {
-        $stmt = $this->db->prepare("UPDATE productos SET Codigo_Barras = ?, Nombre_Producto = ?, Graba_IVA = ? WHERE idProductos = ?");
-        return $stmt->execute([$codigo_barras, $nombre_producto, $graba_iva, $id]);
+    public function eliminar($idProductos)
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "DELETE FROM `productos` WHERE `idProductos`= $idProductos";
+            if (mysqli_query($con, $cadena)) {
+                return 1;
+            } else {
+                return $con->error;
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
     }
-
-    // Eliminar producto
-    public function eliminarProducto($id) {
-        $stmt = $this->db->prepare("DELETE FROM productos WHERE idProductos = ?");
-        return $stmt->execute([$id]);
-    }
-}
-?>
+ }

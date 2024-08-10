@@ -1,35 +1,65 @@
 <?php
-class ClientesController {
-
-    private $model;
-
-    public function __construct($model) {
-        $this->model = $model;
-    }
-
-    // Crear cliente
-    public function crearCliente($nombres, $direccion, $telefono, $cedula, $correo) {
-        return $this->model->crearCliente($nombres, $direccion, $telefono, $cedula, $correo);
-    }
-
-    // Leer todos los clientes
-    public function obtenerClientes() {
-        return $this->model->obtenerClientes();
-    }
-
-    // Leer un solo cliente por ID
-    public function obtenerClientePorId($id) {
-        return $this->model->obtenerClientePorId($id);
-    }
-
-    // Actualizar cliente
-    public function actualizarCliente($id, $nombres, $direccion, $telefono, $cedula, $correo) {
-        return $this->model->actualizarCliente($id, $nombres, $direccion, $telefono, $cedula, $correo);
-    }
-
-    // Eliminar cliente
-    public function eliminarCliente($id) {
-        return $this->model->eliminarCliente($id);
-    }
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+$method = $_SERVER["REQUEST_METHOD"];
+if ($method == "OPTIONS") {
+    die();
 }
-?>
+
+require_once('../models/clientes.model.php');
+error_reporting(0);
+$clientes = new Clientes;
+
+switch ($_GET["op"]) 
+{
+  
+case 'todos':
+$datos = array();
+$datos = $clientes->todos();
+while ($row = mysqli_fetch_assoc($datos))
+{
+    $todos[] = $row;
+}
+echo json_encode($todos);
+break;
+
+case 'uno':
+    $idClientes = $_POST["idClientes"];
+    $datos = array();
+    $datos = $clientes->uno($id>Clientes);
+    $res = mysqli_fetch_assoc($datos);
+    echo json_encode($res);
+    break;
+
+case 'insertar':
+        $Nombres = $_POST["Nombres"];
+        $Direccion = $_POST["Direccion"];
+        $Telefono = $_POST["Telefono"];
+        $Cedula = $_POST["Cedula"];
+        $Correo = $_POST["Correo"];
+
+        $datos = array();
+        $datos = $clientes->insertar($Nombres, $Direccion, $Telefono, $Cedula, $Correo);
+        echo json_encode($datos);
+        break;
+
+    case 'actualizar':
+        $Nombres = $_POST["Nombres"];
+        $Direccion = $_POST["Direccion"];
+        $Telefono = $_POST["Telefono"];
+        $Cedula = $_POST["Cedula"];
+        $Correo = $_POST["Correo"];
+        $datos = array();
+        $datos = $clientes->actualizar($Nombres, $Direccion, $Telefono, $Cedula, $Correo);
+        echo json_encode($datos);
+        break;
+    
+        case 'eliminar':
+            $idClientes = $_POST["idClientes"];
+            $datos = array();
+            $datos = $clientes->eliminar($idClientes);
+            echo json_encode($datos);
+            break;
+}

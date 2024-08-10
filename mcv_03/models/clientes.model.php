@@ -1,41 +1,77 @@
 <?php
-class ClientesModel {
-
-    private $db;
-
-    public function __construct($db) {
-        $this->db = $db;
+require_once('../config/config.php');
+class Clientes
+{
+    public function todos() 
+    {
+        $con = new ClaseConectar();
+        $con = $con->ProcedimientoParaConectar();
+        $cadena = "SELECT * FROM `clientes`";
+        $datos = mysqli_query($con, $cadena);
+        $con->close();
+        return $datos;
+    }
+    public function uno($idClientes)
+    {
+        $con = new ClaseConectar();
+        $con = $con->ProcedimientoParaConectar();
+        $cadena = "SELECT * FROM `clientes` WHERE `idClientes`=$idClientes";
+        $datos = mysqli_query($con, $cadena);
+        $con->close();
+        return $datos;
+    }
+    public function insertar($Nombres, $Direccion, $Telefono, $Cedula, $Correo) 
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "INSERT INTO `clientes` ( `Nombres`, `Direccion`, `Telefono`, `Cedula`, `Correo`) VALUES ('$Nombres','$Direccion','$Telefono','$Cedula','$Correo')";
+            if (mysqli_query($con, $cadena)) {
+                return $con->insert_id;
+            } else {
+                return $con->error;
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
     }
 
-    // Crear cliente
-    public function crearCliente($nombres, $direccion, $telefono, $cedula, $correo) {
-        $stmt = $this->db->prepare("INSERT INTO clientes (Nombres, Direccion, Telefono, Cedula, Correo) VALUES (?, ?, ?, ?, ?)");
-        return $stmt->execute([$nombres, $direccion, $telefono, $cedula, $correo]);
+    public function actualizar($Nombres, $Direccion, $Telefono, $Cedula, $Correo)
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "UPDATE `clientes` SET `Nombres`='$Nombres',`Direccion`='$Direccion',`Telefono`='$Telefono',`Cedula`='$Cedula',`Correo`='$Correo' WHERE `idClientes` = $idClientes";
+            if (mysqli_query($con, $cadena)) {
+                return $idClientes;
+            } else {
+                return $con->error;
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
     }
-
-    // Leer todos los clientes
-    public function obtenerClientes() {
-        $stmt = $this->db->query("SELECT * FROM clientes");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    // Leer un solo cliente por ID
-    public function obtenerClientePorId($id) {
-        $stmt = $this->db->prepare("SELECT * FROM clientes WHERE idClientes = ?");
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
-    // Actualizar cliente
-    public function actualizarCliente($id, $nombres, $direccion, $telefono, $cedula, $correo) {
-        $stmt = $this->db->prepare("UPDATE clientes SET Nombres = ?, Direccion = ?, Telefono = ?, Cedula = ?, Correo = ? WHERE idClientes = ?");
-        return $stmt->execute([$nombres, $direccion, $telefono, $cedula, $correo, $id]);
-    }
-
-    // Eliminar cliente
-    public function eliminarCliente($id) {
-        $stmt = $this->db->prepare("DELETE FROM clientes WHERE idClientes = ?");
-        return $stmt->execute([$id]);
+    
+    public function eliminar($idClientes)
+    {
+        try {
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+            $cadena = "DELETE FROM `clientes` WHERE `idClientes`= $idClientes";
+            
+            if (mysqli_query($con, $cadena)) {
+                return 1;
+            } else {
+                return $con->error;
+            }
+        } catch (Exception $th) {
+            return $th->getMessage();
+        } finally {
+            $con->close();
+        }
     }
 }
-?>
