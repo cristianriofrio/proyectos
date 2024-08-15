@@ -17,7 +17,7 @@ class Ingredientes
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM ingredientes WHERE Ingrediente_id = $Ingrediente_id";
+        $cadena = "SELECT * FROM ingredientes WHERE ingrediente_id = $Ingrediente_id";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
@@ -40,6 +40,7 @@ class Ingredientes
             $con->close();
         }
     }
+
 
     public function actualizar($Ingrediente_id, $Nombre, $Cantidad, $Unidad, $Calorias)
     {

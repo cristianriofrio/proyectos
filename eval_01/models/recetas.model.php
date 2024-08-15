@@ -11,6 +11,7 @@ class Recetas
         $con->close();
         return $datos;
     }
+
     public function uno($Receta_id)
     {
         $con = new ClaseConectar();
@@ -20,39 +21,44 @@ class Recetas
         $con->close();
         return $datos;
     }
+
     public function insertar($Nombre, $Descripcion, $Tiempo_preparacion, $Dificultad) 
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "INSERT INTO `recetas` ( `Nombre`, `Descripcion`, `Tiempo_preparacion`, `Dificultad`) VALUES ('$Nombre','$Descripcion','$Tiempo_preparacion','$Dificultad')";
+            $cadena = "INSERT INTO `recetas` (`Nombre`, `Descripcion`, `Tiempo_preparacion`, `Dificultad`) VALUES ('$Nombre','$Descripcion','$Tiempo_preparacion','$Dificultad')";
             if (mysqli_query($con, $cadena)) {
-                return $con->insert_id;
+                return mysqli_insert_id($con);
             } else {
-                return $con->error;
+                return mysqli_error($con);
             }
         } catch (Exception $th) {
             return $th->getMessage();
         } finally {
-            $con->close();
+            if ($con) {
+                $con->close();
+            }
         }
     }
 
-    public function actualizar($Nombre, $Descripcion, $Tiempo_preparacion, $Dificultad)
+    public function actualizar($Receta_id, $Nombre, $Descripcion, $Tiempo_preparacion, $Dificultad)
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "UPDATE `recetas` SET `Nombre`='$Nombre',`Descripcion='$Descripcion',`Tiempo_preparacion,`='$Tiempo_preparacion,',`Dificultad`='$Dificultad' WHERE `Receta_id` = $Receta_id";
+            $cadena = "UPDATE `recetas` SET `Nombre`='$Nombre', `Descripcion`='$Descripcion', `Tiempo_preparacion`='$Tiempo_preparacion', `Dificultad`='$Dificultad' WHERE `Receta_id` = $Receta_id";
             if (mysqli_query($con, $cadena)) {
                 return $Receta_id;
             } else {
-                return $con->error;
+                return mysqli_error($con);
             }
         } catch (Exception $th) {
             return $th->getMessage();
         } finally {
-            $con->close();
+            if ($con) {
+                $con->close();
+            }
         }
     }
     
@@ -66,12 +72,16 @@ class Recetas
             if (mysqli_query($con, $cadena)) {
                 return 1;
             } else {
-                return $con->error;
+                return mysqli_error($con);
             }
         } catch (Exception $th) {
             return $th->getMessage();
         } finally {
-            $con->close();
+            if ($con) {
+                $con->close();
+            }
         }
     }
 }
+
+?>
