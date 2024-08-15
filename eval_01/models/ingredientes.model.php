@@ -65,17 +65,28 @@ class Ingredientes
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "DELETE FROM ingredientes WHERE Ingrediente_id = $Ingrediente_id";
+
+            // Eliminar registros en la tabla consolidado que dependan del ingrediente
+            $cadenaDependencias = "DELETE FROM `consolidado` WHERE `ingrediente_id` = $Ingrediente_id";
+            if (!mysqli_query($con, $cadenaDependencias)) {
+                return "Error al eliminar dependencias: " . mysqli_error($con);
+            }
+
+            // Eliminar el ingrediente
+            $cadena = "DELETE FROM `ingredientes` WHERE `Ingrediente_id` = $Ingrediente_id";
             if (mysqli_query($con, $cadena)) {
                 return 1;
             } else {
-                return $con->error;
+                return "Error al eliminar ingrediente: " . mysqli_error($con);
             }
         } catch (Exception $th) {
             return $th->getMessage();
         } finally {
-            $con->close();
+            if ($con) {
+                $con->close();
+            }
         }
     }
+
 }
 ?>
