@@ -1,31 +1,68 @@
-CREATE TABLE Estudiantes (
-    estudiante_id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(50) NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
-    grado VARCHAR(10) NOT NULL
-);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
-CREATE TABLE Profesores (
-    profesor_id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(50) NOT NULL,
-    especialidad VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-CREATE TABLE Clases (
-    clase_id INT AUTO_INCREMENT PRIMARY KEY,
-    profesor_id INT,
-    nombre_clase VARCHAR(100) NOT NULL,
-    horario VARCHAR(50) NOT NULL,
-    FOREIGN KEY (profesor_id) REFERENCES Profesores(profesor_id)
-);
+CREATE DATABASE IF NOT EXISTS `recetario` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `recetario`;
 
-CREATE TABLE Asignaciones (
-    asignacion_id INT AUTO_INCREMENT PRIMARY KEY,
-    estudiante_id INT,
-    clase_id INT,
-    FOREIGN KEY (estudiante_id) REFERENCES Estudiantes(estudiante_id),
-    FOREIGN KEY (clase_id) REFERENCES Clases(clase_id)
-);
+CREATE TABLE `consolidado` (
+  `consolidado_id` int(11) NOT NULL,
+  `receta_id` int(11) DEFAULT NULL,
+  `ingrediente_id` int(11) DEFAULT NULL,
+  `cantidad` decimal(10,2) NOT NULL,
+  `unidad` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ingredientes` (
+  `ingrediente_id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `cantidad` decimal(10,2) NOT NULL,
+  `unidad` varchar(20) NOT NULL,
+  `calorias` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `recetas` (
+  `receta_id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `descripcion` text NOT NULL,
+  `tiempo_preparacion` int(11) NOT NULL,
+  `dificultad` enum('Fácil','Media','Difícil') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `consolidado`
+  ADD PRIMARY KEY (`consolidado_id`),
+  ADD KEY `receta_id` (`receta_id`),
+  ADD KEY `ingrediente_id` (`ingrediente_id`);
+
+ALTER TABLE `ingredientes`
+  ADD PRIMARY KEY (`ingrediente_id`);
+
+ALTER TABLE `recetas`
+  ADD PRIMARY KEY (`receta_id`);
+
+
+ALTER TABLE `consolidado`
+  MODIFY `consolidado_id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ingredientes`
+  MODIFY `ingrediente_id` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `recetas`
+  MODIFY `receta_id` int(11) NOT NULL AUTO_INCREMENT;
+
+
+ALTER TABLE `consolidado`
+  ADD CONSTRAINT `consolidado_ibfk_1` FOREIGN KEY (`receta_id`) REFERENCES `recetas` (`receta_id`),
+  ADD CONSTRAINT `consolidado_ibfk_2` FOREIGN KEY (`ingrediente_id`) REFERENCES `ingredientes` (`ingrediente_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
