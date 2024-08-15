@@ -63,25 +63,33 @@ class Recetas
     }
     
     public function eliminar($Receta_id)
-    {
-        try {
-            $con = new ClaseConectar();
-            $con = $con->ProcedimientoParaConectar();
-            $cadena = "DELETE FROM `recetas` WHERE `Receta_id`= $Receta_id";
-            
-            if (mysqli_query($con, $cadena)) {
-                return 1;
-            } else {
-                return mysqli_error($con);
-            }
-        } catch (Exception $th) {
-            return $th->getMessage();
-        } finally {
-            if ($con) {
-                $con->close();
-            }
+{
+    try {
+        $con = new ClaseConectar();
+        $con = $con->ProcedimientoParaConectar();
+
+        // Eliminar registros en la tabla consolidado que dependan de la receta
+        $cadenaDependencias = "DELETE FROM `consolidado` WHERE `receta_id` = $Receta_id";
+        if (!mysqli_query($con, $cadenaDependencias)) {
+            return "Error al eliminar dependencias: " . mysqli_error($con);
+        }
+
+        // Eliminar la receta
+        $cadena = "DELETE FROM `recetas` WHERE `Receta_id` = $Receta_id";
+        if (mysqli_query($con, $cadena)) {
+            return 1;
+        } else {
+            return "Error al eliminar receta: " . mysqli_error($con);
+        }
+    } catch (Exception $th) {
+        return $th->getMessage();
+    } finally {
+        if ($con) {
+            $con->close();
         }
     }
+}
+
 }
 
 ?>
