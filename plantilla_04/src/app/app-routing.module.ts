@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 // Project import
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestComponent } from './theme/layouts/guest/guest.component';
-
+import { ProveedoresComponent } from './proveedores/proveedores.component';
 const routes: Routes = [
   {
     path: '',
@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
+      }
+      {
+        path: 'proveedores',
+        loadComponent: () => import('./proveedores/proveedores.component').then((m) => m.ProveedoresComponent)
       }
     ]
   },
