@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestComponent } from './theme/layouts/guest/guest.component';
 import { ProveedoresComponent } from './proveedores/proveedores.component';
+import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
 const routes: Routes = [
   {
     path: '',
@@ -35,6 +36,10 @@ const routes: Routes = [
       {
         path: 'proveedores',
         loadComponent: () => import('./proveedores/proveedores.component').then((m) => m.ProveedoresComponent)
+      }
+      {
+        path: 'nuevoproveedor',
+        loadComponent: () => import('../proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent)
       }
     ]
   },
