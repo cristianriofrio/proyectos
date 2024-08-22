@@ -5,11 +5,10 @@ import { RouterModule, Routes } from '@angular/router';
 // Project import
 import { AdminComponent } from './theme/layouts/admin-layout/admin-layout.component';
 import { GuestComponent } from './theme/layouts/guest/guest.component';
-import { ProveedoresComponent } from './proveedores/proveedores.component';
-import { NuevoproveedorComponent } from './proveedores/nuevoproveedor/nuevoproveedor.component';
+
 const routes: Routes = [
   {
-    path: '',
+    path: '', //url
     component: AdminComponent,
     children: [
       {
@@ -32,14 +31,18 @@ const routes: Routes = [
       {
         path: 'sample-page',
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
-      }
+      },
       {
         path: 'proveedores',
         loadComponent: () => import('./proveedores/proveedores.component').then((m) => m.ProveedoresComponent)
-      }
+      },
       {
         path: 'nuevoproveedor',
-        loadComponent: () => import('../proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent)
+        loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent)
+      },
+      {
+        path: 'editarproveedor/:id',
+        loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent)
       }
     ]
   },
