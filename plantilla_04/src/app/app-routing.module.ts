@@ -48,6 +48,10 @@ const routes: Routes = [
         path: 'clientes',
         loadComponent: () => import('./clientes/clientes.component').then((m) => m.ClientesComponent)
       }
+      {
+        path: 'editarcliente',
+        loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent)
+      }
     ]
   },
   {
