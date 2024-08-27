@@ -43,13 +43,17 @@ const routes: Routes = [
       {
         path: 'editarproveedor/:id',
         loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent)
-      }
+      },
       {
         path: 'clientes',
         loadComponent: () => import('./clientes/clientes.component').then((m) => m.ClientesComponent)
-      }
+      },
       {
-        path: 'editarcliente',
+        path: 'nuevocliente',
+        loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent)
+      },
+      {
+        path: 'editarcliente/:id',
         loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent)
       }
     ]
