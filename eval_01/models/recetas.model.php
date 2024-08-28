@@ -16,11 +16,20 @@ class Recetas
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM `recetas` WHERE `Receta_id`=$Receta_id";
+        $Receta_id = mysqli_real_escape_string($con, $Receta_id);
+        $cadena = "SELECT * FROM `recetas` WHERE `Receta_id` = '$Receta_id'";
         $datos = mysqli_query($con, $cadena);
+
+        if ($datos && mysqli_num_rows($datos) > 0) {
+            $result = mysqli_fetch_assoc($datos);
+        } else {
+            $result = null; // Devolver null si no se encuentra la receta
+        }
+
         $con->close();
-        return $datos;
+        return $result;
     }
+
 
     public function insertar($Nombre, $Descripcion, $Tiempo_preparacion, $Dificultad) 
     {

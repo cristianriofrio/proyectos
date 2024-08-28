@@ -32,8 +32,6 @@ export class NuevoComponent implements OnInit {
     if (receta_id > 0) {
       this.receta.receta_id = receta_id;
       this.servicio.uno(this.receta.receta_id).subscribe((receta: Receta) => {
-
-        console.log(receta);
         this.receta = receta;
       });
     }

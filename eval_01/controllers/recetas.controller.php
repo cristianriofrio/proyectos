@@ -27,10 +27,13 @@ switch ($_GET["op"])
         break;
 
     case 'uno':
-        $Recetas_id = $_POST["Recetas_id"];
-        $result = $recetas->uno($Recetas_id);
-        $res = mysqli_fetch_assoc($result);
-        echo json_encode($res);
+        $Recetas_id = isset($_POST["Recetas_id"]) ? $_POST["Recetas_id"] : null;
+        if ($Recetas_id) {
+            $result = $recetas->uno($Recetas_id);
+            echo json_encode($result);
+        } else {
+            echo json_encode(["error" => "Recetas_id no proporcionado."]);
+        }
         break;
 
     case 'insertar':
