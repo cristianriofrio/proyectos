@@ -46,7 +46,7 @@ export const NavigationItems: NavigationItem[] = [
         title: 'Preparación',
         type: 'item',
         classes: 'nav-item',
-        url: '/facturas',
+        url: '/preparacion',
         icon: 'bi bi-3-circle'
       }
     ]

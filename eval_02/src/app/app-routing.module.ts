@@ -40,6 +40,10 @@ const routes: Routes = [
         path: 'receta',
         loadChildren: () => import('./receta/receta.routes')
       },
+      {
+        path: 'preparacion',
+        loadChildren: () => import('./preparacion/preparacion.routes')
+      },
     ]
   },
   {
