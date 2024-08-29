@@ -34,10 +34,10 @@ export class PreparacionService {
   actualizar(preparacion: Preparacion): Observable<string> {
     const formData = new FormData();
     formData.append('consolidado_id', preparacion.consolidado_id.toString());
-    formData.append('Receta Id', preparacion.receta_id.toString());
-    formData.append('Ingrediente Id', preparacion.ingrediente_id.toString());
-    formData.append('Cantidad', preparacion.cantidad.toString());
-    formData.append('Unidad', preparacion.unidad);
+    formData.append('receta_id', preparacion.receta_id.toString());
+    formData.append('ingrediente_id', preparacion.ingrediente_id.toString());
+    formData.append('cantidad', preparacion.cantidad.toString());
+    formData.append('unidad', preparacion.unidad);
     return this.lector.post<string>(this.apiurl + 'actualizar', formData);
   }
 }

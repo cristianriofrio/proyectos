@@ -55,7 +55,7 @@ export class NuevoComponent implements OnInit {
         console.log('----2----',respuesta)
         if (parseInt(respuesta) > 0) {
           alert('Actualizado con exito');
-          this.navegacion.navigate(['/ingrediente']);
+          this.navegacion.navigate(['/preparacion']);
         } else {
           alert('Error al actualizar');
         }
