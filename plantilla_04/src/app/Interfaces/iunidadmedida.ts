@@ -1,5 +1,5 @@
 export interface IUnidadMedida {
-    idUnidadMedida: number;
-    Descripcion: string;
+    idUnidad_Medida?: number;
+    Detalle: string;
     Tipo: number;
-}
+  }
