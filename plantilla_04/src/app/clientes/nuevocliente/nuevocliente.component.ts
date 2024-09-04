@@ -30,6 +30,8 @@ export class NuevoclienteComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    
+console.log(this.ruta.snapshot.paramMap)
     this.idClientes = parseInt(this.ruta.snapshot.paramMap.get('idCliente'));
     if (this.idClientes > 0) {
       this.clienteServicio.uno(this.idClientes).subscribe((uncliente) => {
@@ -38,21 +40,6 @@ export class NuevoclienteComponent implements OnInit {
         this.frm_Cliente.controls['Telefono'].setValue(uncliente.Telefono);
         this.frm_Cliente.controls['Cedula'].setValue(uncliente.Cedula);
         this.frm_Cliente.controls['Correo'].setValue(uncliente.Correo);
-        /*this.frm_Cliente.setValue({
-          Nombres: uncliente.Nombres,
-          Direccion: uncliente.Direccion,
-          Telefono: uncliente.Telefono,
-          Cedula: uncliente.Cedula,
-          Correo: uncliente.Correo
-        });*/
-        /*this.frm_Cliente.patchValue({
-          Cedula: uncliente.Cedula,
-          Correo: uncliente.Correo,
-          Nombres: uncliente.Nombres,
-          Direccion: uncliente.Direccion,
-          Telefono: uncliente.Telefono
-        });*/
-
         this.titulo = 'Editar Cliente';
       });
     }
@@ -68,7 +55,7 @@ export class NuevoclienteComponent implements OnInit {
       Correo: this.frm_Cliente.controls['Correo'].value
     };
 
-    Swal.fire({
+      Swal.fire({
       title: 'Clientes',
       text: 'Desea gurdar al Cliente ' + this.frm_Cliente.controls['Nombres'].value,
       icon: 'warning',

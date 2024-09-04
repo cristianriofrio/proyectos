@@ -21,7 +21,7 @@ export class FacturasComponent implements OnInit {
     });
   }
 
-  //eliminar(idFactura) {}//
+
   
   eliminar(idFacturas) {
     Swal.fire({

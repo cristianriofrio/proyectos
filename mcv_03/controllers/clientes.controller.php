@@ -28,7 +28,7 @@ break;
 case 'uno':
     $idClientes = $_POST["idClientes"];
     $datos = array();
-    $datos = $clientes->uno($id>Clientes);
+    $datos = $clientes->uno($idClientes);
     $res = mysqli_fetch_assoc($datos);
     echo json_encode($res);
     break;
@@ -56,7 +56,7 @@ case 'insertar':
         echo json_encode($datos);
         break;
     
-        case 'eliminar':
+    case 'eliminar':
             $idClientes = $_POST["idClientes"];
             $datos = array();
             $datos = $clientes->eliminar($idClientes);
