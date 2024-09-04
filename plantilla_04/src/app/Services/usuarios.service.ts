@@ -9,11 +9,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class UsuariosService {
   private loggedIn = new BehaviorSubject<boolean>(false);
-  apiurl = 'http://localhost/Proyectos/mcv_03/controllers/usuarios.controller.php?op=';
+  apiurl = 'http://localhost/proyectos/mcv_03/controllers/usuarios.controller.php?op=';
   constructor(
     private lector: HttpClient,
     private navegacion: Router
-  ) {}
+  ) {
+    this.checkLoginStatus();
+  }
   login(usuario: IUsuarios) {
     let formData = new FormData();
     formData.append('Nombre_Usuario', usuario.Nombre_Usuario);
@@ -40,8 +42,8 @@ export class UsuariosService {
     return this.loggedIn.asObservable();
   }
   checkLoginStatus() {
-    const usuario = sessionStorage.getItem('nombreUsuario');
-    if (usuario) {
+    const usuario = sessionStorage.getItem('rolesIdRoles');
+    if (parseInt(usuario) > 0) {
       this.loggedIn.next(true);
     }
   }

@@ -19,7 +19,8 @@ const routes: Routes = [
       },
       {
         path: 'dashboard/default',
-        loadComponent: () => import('./demo/default/dashboard/dashboard.component').then((c) => c.DefaultComponent)
+        loadComponent: () => import('./demo/default/dashboard/dashboard.component').then((c) => c.DefaultComponent),
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'typography',
@@ -41,27 +42,27 @@ const routes: Routes = [
       {
         path: 'nuevoproveedor',
         loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent),
-        //canActivate: [usuariosGuardGuard]
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'editarproveedor/:id',
         loadComponent: () => import('./proveedores/nuevoproveedor/nuevoproveedor.component').then((m) => m.NuevoproveedorComponent),
-        //canActivate: [usuariosGuardGuard]
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'clientes',
         loadComponent: () => import('./clientes/clientes.component').then((m) => m.ClientesComponent),
-        //canActivate: [usuariosGuardGuard]
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'nuevocliente',
         loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent),
-        //canActivate: [usuariosGuardGuard]
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'editarcliente/:idCliente',
         loadComponent: () => import('./clientes/nuevocliente/nuevocliente.component').then((m) => m.NuevoclienteComponent),
-        //canActivate: [usuariosGuardGuard]
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'editarfactura/:id',
@@ -70,7 +71,7 @@ const routes: Routes = [
       {
         path: 'nuevafactura',
         loadComponent: () => import('./facturas/nuevafactura/nuevafactura.component').then((m) => m.NuevafacturaComponent),
-        //canActivate: [usuariosGuardGuard]
+        canActivate: [usuariosGuardGuard]
       },
       {
         path: 'facturas',
