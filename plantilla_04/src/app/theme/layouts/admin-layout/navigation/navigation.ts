@@ -36,34 +36,7 @@ export const NavigationItems: NavigationItem[] = [
       }
     ]
   },
-  /* {
-    id: 'authentication',
-    title: 'Authentication',
-    type: 'group',
-    icon: 'icon-navigation',
-    children: [
-      {
-        id: 'login',
-        title: 'Login',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/login',
-        icon: 'login',
-        target: true,
-        breadcrumbs: false
-      },
-      {
-        id: 'register',
-        title: 'Register',
-        type: 'item',
-        classes: 'nav-item',
-        url: '/register',
-        icon: 'profile',
-        target: true,
-        breadcrumbs: false
-      }
-    ]
-  },*/
+ 
   {
     id: 'Componentes',
     title: 'Componentes',
@@ -76,7 +49,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/proveedores',
-        icon: ''
+        icon: 'ant-design'
       },
       {
         id: 'color',
@@ -84,7 +57,7 @@ export const NavigationItems: NavigationItem[] = [
         type: 'item',
         classes: 'nav-item',
         url: '/clientes',
-        icon: 'bg-colors'
+        icon: 'ant-design'
       },
       {
         id: 'tabler',
