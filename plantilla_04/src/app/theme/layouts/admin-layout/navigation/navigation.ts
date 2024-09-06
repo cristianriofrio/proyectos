@@ -74,7 +74,7 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/unidadmedida',
         icon: 'ant-design'
-      }
+      },
       {
         id: 'tabler',
         title: 'Productos',

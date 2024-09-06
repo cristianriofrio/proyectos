@@ -23,41 +23,5 @@ switch ($_GET["op"]) {
             $todos[] = $row;
         }
         echo json_encode($todos);
-        break;
-        
-    case 'uno':
-        $idIVA = $_POST["idIVA"];
-        $datos = array();
-        $datos = $iva->uno($idIVA);
-        $res = mysqli_fetch_assoc($datos);
-        echo json_encode($res);
-        break;
-     
-    case 'insertar':
-        $Detalle = $_POST["Detalle"];
-        $Estado = $_POST["Estado"];
-        $Valor = $_POST["Valor"];
-
-        $datos = array();
-        $datos = $iva->insertar($Detalle, $Estado, $Valor);
-        echo json_encode($datos);
-        break;
-        
-    case 'actualizar':
-        $idIVA = $_POST["idIVA"];
-        $Detalle = $_POST["Detalle"];
-        $Estado = $_POST["Estado"];
-        $Valor = $_POST["Valor"];
-       
-        $datos = array();
-        $datos = $iva->actualizar($idIVA, $Detalle, $Estado, $Valor);
-        echo json_encode($datos);
-        break;
-        
-    case 'eliminar':
-        $idIVA = $_POST["idIVA"];
-        $datos = array();
-        $datos = $iva->eliminar($idIVA);
-        echo json_encode($datos);
-        break;
-}
+        break;   
+    }
