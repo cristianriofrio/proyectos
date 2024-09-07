@@ -3,8 +3,7 @@
 require_once('../config/config.php');
 class Iva
 {
-       public function todos() 
-    {
+    public function todos() {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
         $cadena = "SELECT * FROM `iva`";

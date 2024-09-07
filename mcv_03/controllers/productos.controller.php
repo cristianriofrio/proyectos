@@ -15,7 +15,7 @@ error_reporting(0);
 $producto = new Producto;
 
 switch ($_GET["op"]) {
-        // TODO: Operaciones de productos
+    // TODO: Operaciones de productos
 
     case 'todos': // Procedimiento para cargar todos los productos
         $datos = array();
@@ -39,7 +39,17 @@ switch ($_GET["op"]) {
         break;
 
     case 'insertar': // Procedimiento para insertar un nuevo producto y actualizar el kardex
-        if (!isset($_POST["Codigo_Barras"]) || !isset($_POST["Nombre_Producto"]) || !isset($_POST["Graba_IVA"]) || !isset($_POST["Unidad_Medida_idUnidad_Medida"]) || !isset($_POST["IVA_idIVA"]) || !isset($_POST["Cantidad"]) || !isset($_POST["Valor_Compra"]) || !isset($_POST["Valor_Venta"]) || !isset($_POST["Proveedores_idProveedores"])) {
+        if (
+            !isset($_POST["Codigo_Barras"]) ||
+            !isset($_POST["Nombre_Producto"]) ||
+            !isset($_POST["Graba_IVA"]) ||
+            !isset($_POST["Unidad_Medida_idUnidad_Medida"]) ||
+            !isset($_POST["IVA_idIVA"]) ||
+            !isset($_POST["Cantidad"]) ||
+            !isset($_POST["Valor_Compra"]) ||
+            !isset($_POST["Valor_Venta"]) ||
+            !isset($_POST["Proveedores_idProveedores"])
+        ) {
             echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
@@ -60,7 +70,12 @@ switch ($_GET["op"]) {
         break;
 
     case 'actualizar': // Procedimiento para actualizar un producto existente
-        if (!isset($_POST["idProductos"]) || !isset($_POST["Codigo_Barras"]) || !isset($_POST["Nombre_Producto"]) || !isset($_POST["Graba_IVA"])) {
+        if (
+            !isset($_POST["idProductos"]) ||
+            !isset($_POST["Codigo_Barras"]) ||
+            !isset($_POST["Nombre_Producto"]) ||
+            !isset($_POST["Graba_IVA"])
+        ) {
             echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }

@@ -14,3 +14,4 @@ export class IvaService {
   todos(): Observable<Iva[]> {
     return this.lector.get<Iva[]>(this.apiurl + 'todos');
   }
+}

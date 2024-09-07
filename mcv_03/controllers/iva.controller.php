@@ -9,19 +9,22 @@ if ($method == "OPTIONS") {
 }
 
 require_once('../models/iva.model.php');
-error_reporting(0);/
+error_reporting(0);
 $iva = new Iva;
 
 switch ($_GET["op"]) {
-       
+    // TODO: Operaciones de productos
 
-    case 'todos': 
-        $datos = array(); 
-        $datos = $iva->todos(); 
-        while ($row = mysqli_fetch_assoc($datos)) 
-        {
+    case 'todos': // Procedimiento para cargar todos
+        $datos = array();
+        $datos = $iva->todos();
+        while ($row = mysqli_fetch_assoc($datos)) {
             $todos[] = $row;
         }
         echo json_encode($todos);
-        break;   
-    }
+        break;
+
+    default:
+        echo json_encode(["error" => "Invalid operation."]);
+        break;
+}

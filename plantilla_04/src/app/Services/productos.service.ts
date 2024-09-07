@@ -42,7 +42,6 @@ export class ProductoService {
     formData.append('Valor_Compra', producto.Valor_Compra.toString());
     formData.append('Valor_Venta', producto.Valor_Venta.toString());
     formData.append('Proveedores_idProveedores', producto.Proveedores_idProveedores.toString());
-
     // Insertar el producto y kardex
     return this.http.post<string>(this.apiurl + 'insertar', formData);
   }
@@ -50,11 +49,15 @@ export class ProductoService {
   // Método para actualizar un producto
   actualizar(producto: IProducto): Observable<string> {
     const formData = new FormData();
-    formData.append('idProductos', producto.idProductos.toString());
-    formData.append('Codigo_Barras', producto.Codigo_Barras);
+    formData.append('idProductos', `${producto.idProductos}`);
+    formData.append('Codigo_Barras', producto.Codigo_Barras.toString());
     formData.append('Nombre_Producto', producto.Nombre_Producto);
     formData.append('Graba_IVA', producto.Graba_IVA.toString());
-
+    formData.append('Unidad_Medida_idUnidad_Medida', producto.Unidad_Medida_idUnidad_Medida.toString());
+    formData.append('IVA_idIVA', producto.IVA_idIVA.toString());
+    formData.append('Cantidad', producto.Cantidad.toString());
+    formData.append('Valor_Compra', producto.Valor_Compra.toString());
+    formData.append('Valor_Venta', producto.Valor_Venta.toString());
     // Actualizar el producto
     return this.http.post<string>(this.apiurl + 'actualizar', formData);
   }
