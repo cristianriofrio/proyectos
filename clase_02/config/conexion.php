@@ -22,3 +22,4 @@ class ClaseConectar
 
         return $this->conexion;
     }
+}
