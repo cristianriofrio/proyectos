@@ -84,4 +84,37 @@ class Factura
             $con->close();
         }
     }
+
+    public function productosPorFactura($idFactura)
+    {
+        try {
+            // Conectar a la base de datos
+            $con = new ClaseConectar();
+            $con = $con->ProcedimientoParaConectar();
+    
+            // Consulta SQL para obtener los productos relacionados con una factura específica
+            $cadena = "SELECT productos.Nombre_Producto DESCRIPCION,
+                              KARDEX.CANTIDAD, 
+                              KARDEX.Valor_Venta PRECIOUNITARIO,    
+                              (KARDEX.CANTIDAD * KARDEX.Valor_Venta) AS SUBTOTAL, 
+                              KARDEX.IVA, ((KARDEX.CANTIDAD * KARDEX.Valor_Venta) +  KARDEX.IVA) AS TOTAL
+                            FROM KARDEX
+                            INNER JOIN productos ON productos.idProductos = kardex.Productos_idProductos
+                        WHERE kardex.idKardex = $idFactura";
+    
+            // Ejecutar la consulta
+            $datos = mysqli_query($con, $cadena);
+    
+            // Cerrar la conexión
+            $con->close();
+    
+            // Retornar los productos
+            return $datos;
+    
+        } catch (Exception $e) {
+            // Manejo de errores
+            return "Error: " . $e->getMessage();
+        }
+    }
+    
 }
