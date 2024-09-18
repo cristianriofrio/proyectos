@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { Receta } from '../Interfaces/receta';
-import { RecetaService } from '../Services/receta.service';
+import { Receta } from '../Interfaces/IOrdenCompra';
+import { RecetaService } from '../Services/productos.service';
 import { RouterLink } from '@angular/router';
 
 @Component({

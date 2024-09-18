@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Preparacion } from 'src/app/Interfaces/preparacion';
-import { PreparacionService } from 'src/app/Services/preparacion.service';
+import { PreparacionService } from 'src/app/Services/ordenes-compra.service';
 
 @Component({
   selector: 'app-nuevo-ingrediente',

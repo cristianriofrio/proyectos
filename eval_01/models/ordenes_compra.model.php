@@ -1,36 +1,37 @@
 <?php
 require_once '../config/config.php';
 
-class Ingredientes
+class Ordenes_Compra
 {
+
     public function todos() 
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM ingredientes";
+        $cadena = "SELECT * FROM ordenes_compra";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
     }
 
-    public function uno($Ingrediente_id)
+    public function uno($idOrden)
     {
         $con = new ClaseConectar();
         $con = $con->ProcedimientoParaConectar();
-        $cadena = "SELECT * FROM ingredientes WHERE ingrediente_id = $Ingrediente_id";
+        $cadena = "SELECT * FROM ordenes_compra WHERE idOrden = $idOrden";
         $datos = mysqli_query($con, $cadena);
         $con->close();
         return $datos;
     }
 
-    public function insertar($Nombre, $Cantidad, $Unidad, $Calorias) 
+    public function insertar($idProveedores, $fecha_orden, $total) 
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "INSERT INTO ingredientes (Nombre, Cantidad, Unidad, Calorias) VALUES ('$Nombre', '$Cantidad', '$Unidad', '$Calorias')";
+            $cadena = "INSERT INTO ordenes_compra (idProveedores, fecha_orden, total) VALUES ('$idProveedores', '$fecha_orden', '$total')";
             if (mysqli_query($con, $cadena)) {
-                return $con->insert_id;
+                return $con->insert_id;  
             } else {
                 return $con->error;
             }
@@ -41,15 +42,14 @@ class Ingredientes
         }
     }
 
-
-    public function actualizar($Ingrediente_id, $Nombre, $Cantidad, $Unidad, $Calorias)
+    public function actualizar($idOrden, $idProveedores, $fecha_orden, $total)
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-            $cadena = "UPDATE ingredientes SET Nombre = '$Nombre', Cantidad = '$Cantidad', Unidad = '$Unidad', Calorias = '$Calorias' WHERE Ingrediente_id = $Ingrediente_id";
+            $cadena = "UPDATE ordenes_compra SET idProveedores = '$idProveedores', fecha_orden = '$fecha_orden', total = '$total' WHERE idOrden = $idOrden";
             if (mysqli_query($con, $cadena)) {
-                return $Ingrediente_id;
+                return $idOrden;  
             } else {
                 return $con->error;
             }
@@ -60,24 +60,16 @@ class Ingredientes
         }
     }
 
-    public function eliminar($Ingrediente_id)
+    public function eliminar($idOrden)
     {
         try {
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
-
-            // Eliminar registros en la tabla consolidado que dependan del ingrediente
-            $cadenaDependencias = "DELETE FROM `consolidado` WHERE `ingrediente_id` = $Ingrediente_id";
-            if (!mysqli_query($con, $cadenaDependencias)) {
-                return "Error al eliminar dependencias: " . mysqli_error($con);
-            }
-
-            // Eliminar el ingrediente
-            $cadena = "DELETE FROM `ingredientes` WHERE `Ingrediente_id` = $Ingrediente_id";
+            $cadena = "DELETE FROM ordenes_compra WHERE idOrden = $idOrden";
             if (mysqli_query($con, $cadena)) {
-                return 1;
+                return 1; 
             } else {
-                return "Error al eliminar ingrediente: " . mysqli_error($con);
+                return "Error al eliminar orden de compra: " . mysqli_error($con);
             }
         } catch (Exception $th) {
             return $th->getMessage();
@@ -87,6 +79,5 @@ class Ingredientes
             }
         }
     }
-
 }
 ?>

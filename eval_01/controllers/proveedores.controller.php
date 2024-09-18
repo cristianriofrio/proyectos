@@ -12,14 +12,14 @@ if ($method == "OPTIONS") {
     die();
 }
 
-require_once '../models/ingredientes.model.php';
+require_once '../models/proveedores.model.php';
 error_reporting(0);
-$ingredientes = new Ingredientes;
+$proveedores = new Proveedores();
 
 switch ($_GET["op"]) 
 {
     case 'todos':
-        $datos = $ingredientes->todos();
+        $datos = $proveedores->todos();
         $todos = array();
         while ($row = mysqli_fetch_assoc($datos)) {
             $todos[] = $row;
@@ -28,34 +28,34 @@ switch ($_GET["op"])
         break;
 
     case 'uno':
-        $Ingrediente_id = $_POST["Ingrediente_id"];
-        $datos = $ingredientes->uno($Ingrediente_id);
+        $idProveedores = $_POST["idProveedores"];
+        $datos = $proveedores->uno($idProveedores);
         $res = mysqli_fetch_assoc($datos);
         echo json_encode($res);
         break;
 
     case 'insertar':
-        $Nombre = $_POST["Nombre"];
-        $Cantidad= $_POST["Cantidad"];
-        $Unidad = $_POST["Unidad"];
-        $Calorias = $_POST["Calorias"];
-        $datos = $ingredientes->insertar($Nombre, $Cantidad, $Unidad, $Calorias);
+        $nombre = $_POST["nombre"];
+        $direccion = $_POST["direccion"];
+        $telefono = $_POST["telefono"];
+        $email = $_POST["email"];
+        $datos = $proveedores->insertar($nombre, $direccion, $telefono, $email);
         echo json_encode($datos);
         break;
 
     case 'actualizar':
-        $Ingrediente_id = $_POST["Ingrediente_id"];  // Este campo estaba faltando
-        $Nombre = $_POST["Nombre"];
-        $Cantidad= $_POST["Cantidad"];
-        $Unidad = $_POST["Unidad"];
-        $Calorias = $_POST["Calorias"];
-        $datos = $ingredientes->actualizar($Ingrediente_id, $Nombre, $Cantidad, $Unidad, $Calorias);
+        $idProveedores = $_POST["idProveedores"];
+        $nombre = $_POST["nombre"];
+        $direccion = $_POST["direccion"];
+        $telefono = $_POST["telefono"];
+        $email = $_POST["email"];
+        $datos = $proveedores->actualizar($idProveedores, $nombre, $direccion, $telefono, $email);
         echo json_encode($datos);
         break;
 
     case 'eliminar':
-        $Ingrediente_id = $_POST["Ingrediente_id"];
-        $datos = $ingredientes->eliminar($Ingrediente_id);
+        $idProveedores = $_POST["idProveedores"];
+        $datos = $proveedores->eliminar($idProveedores);
         echo json_encode($datos);
         break;
 }

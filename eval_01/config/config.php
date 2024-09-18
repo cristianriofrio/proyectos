@@ -6,7 +6,7 @@ class ClaseConectar
     private $host = "localhost";
     private $usuario = "root";
     private $pass = "root";
-    private $base = "recetario";
+    private $base = "inventarios";
 
     public function ProcedimientoParaConectar()
     {

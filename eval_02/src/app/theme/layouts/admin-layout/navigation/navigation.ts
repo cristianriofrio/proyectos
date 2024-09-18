@@ -26,27 +26,27 @@ export const NavigationItems: NavigationItem[] = [
     icon: 'icon-navigation',
     children: [
       {
-        id: 'ingredientes',
-        title: 'Ingrediente',
+        id: 'proveedores',
+        title: 'Proveedores',
         type: 'item',
         classes: 'nav-item',
-        url: '/ingrediente',
+        url: '/proveedor',
         icon: 'bi bi-1-circle'
       },
       {
-        id: 'color',
-        title: 'Recetas',
+        id: 'productos',
+        title: 'Productos',
         type: 'item',
         classes: 'nav-item',
-        url: '/receta',
+        url: '/producto',
         icon: 'bi bi-2-circle'
       },
       {
-        id: 'tabler',
-        title: 'Preparación',
+        id: 'ordenes',
+        title: 'Ordenes',
         type: 'item',
         classes: 'nav-item',
-        url: '/preparacion',
+        url: '/orden',
         icon: 'bi bi-3-circle'
       }
     ]

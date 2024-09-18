@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
 import { RouterLink } from '@angular/router';
 
-import { Preparacion } from '../Interfaces/preparacion';
-import { PreparacionService } from '../Services/preparacion.service';
+import { Preparacion } from '../Interfaces/IProducto';
+import { PreparacionService } from '../Services/ordenes-compra.service';
 
 @Component({
   selector: 'app-ingrediente',

@@ -33,16 +33,16 @@ const routes: Routes = [
         loadComponent: () => import('./demo/other/sample-page/sample-page.component')
       },
       {
-        path: 'ingrediente',
-        loadChildren: () => import('./ingrediente/ingrediente.routes')
+        path: 'proveedor',
+        loadChildren: () => import('./proveedor/proveedor.routes')
       },
       {
-        path: 'receta',
-        loadChildren: () => import('./receta/receta.routes')
+        path: 'producto',
+        loadChildren: () => import('./producto/producto.routes')
       },
       {
-        path: 'preparacion',
-        loadChildren: () => import('./preparacion/preparacion.routes')
+        path: 'orden',
+        loadChildren: () => import('./orden/orden.routes')
       },
     ]
   },

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { Ingrediente } from '../Interfaces/ingrediente';
-import { IngredienteService } from '../Services/ingrediente.service';
+import { Ingrediente } from '../Interfaces/IProveedor';
+import { IngredienteService } from '../Services/proveedores.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
