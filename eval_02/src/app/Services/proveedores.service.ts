@@ -6,7 +6,7 @@ import { IProveedor } from '../Interfaces/IProveedor';
 @Injectable({
   providedIn: 'root'
 })
-export class IngredienteService {
+export class ProveedorService {
   apiurl = 'http://localhost/proyectos/eval_01/controllers/proveedores.controller.php?op=';
  
    constructor(private http: HttpClient) {}
@@ -14,7 +14,6 @@ export class IngredienteService {
   todos(): Observable<IProveedor[]> {
     return this.http.get<IProveedor[]>(this.apiurl + 'todos');
   }
-
 
   uno(idProveedores: number): Observable<IProveedor> {
     const formData = new FormData();

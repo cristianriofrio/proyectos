@@ -1,20 +1,25 @@
 import { Component } from '@angular/core';
 import { SharedModule } from 'src/app/theme/shared/shared.module';
-import { Receta } from '../Interfaces/IOrdenCompra';
-import { RecetaService } from '../Services/productos.service';
 import { RouterLink } from '@angular/router';
 
+import { IOrdenCompra } from '../Interfaces/IOrdenCompra';
+import { OrdenCompraService } from '../Services/ordenes-compra.service';
+
 @Component({
-  selector: 'app-receta',
+  selector: 'app-orden-compra',
   standalone: true,
   imports: [SharedModule, RouterLink],
-  templateUrl: './receta.component.html'
+  templateUrl: './orden-compra.component.html',
+  styleUrl: './orden-compra.component.scss'
 })
-export class RecetaComponent {
-  title = 'Lista de Receta';
 
-  lista: Receta[] = [];
-  constructor(private service: RecetaService) {}
+export class OrdenCompraComponent {
+
+  title = 'Lista de Orden de Compra';
+
+  lista: IOrdenCompra[] = [];
+
+  constructor(private service: OrdenCompraService) {}
   ngOnInit() {
     this.cargatabla();
   }
@@ -27,8 +32,8 @@ export class RecetaComponent {
 
   eliminar(id: number) {
     this.service.eliminar(id).subscribe((data) => {
-      console.log(data);
       this.cargatabla();
     });
   }
+
 }

@@ -48,6 +48,14 @@ export const NavigationItems: NavigationItem[] = [
         classes: 'nav-item',
         url: '/orden',
         icon: 'bi bi-3-circle'
+      },
+      {
+        id: 'reportes',
+        title: 'Reportes',
+        type: 'item',
+        classes: 'nav-item',
+        url: '/reporte',
+        icon: 'bi bi-4-circle'
       }
     ]
   },

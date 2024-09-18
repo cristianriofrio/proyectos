@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IOrdenCompra } from '../Interfaces/Iordencompra';
 import { Observable } from 'rxjs';
+
+import { IOrdenCompra } from '../Interfaces/IOrdenCompra';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PreparacionService {
+export class OrdenCompraService {
   apiurl = 'http://localhost/proyectos/eval_01/controllers/ordenes_compra.controller.php?op=';
 
   constructor(private http: HttpClient) {}

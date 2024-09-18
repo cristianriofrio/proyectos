@@ -34,15 +34,19 @@ const routes: Routes = [
       },
       {
         path: 'proveedor',
-        loadChildren: () => import('./proveedor/proveedor.routes')
+        loadChildren: () => import('./proveedores/proveedores.routes')
       },
       {
         path: 'producto',
-        loadChildren: () => import('./producto/producto.routes')
+        loadChildren: () => import('./productos/producto.routes')
       },
       {
         path: 'orden',
-        loadChildren: () => import('./orden/orden.routes')
+        loadChildren: () => import('./orden-compra/orden-compra.routes')
+      },
+      {
+        path: 'reporte',
+        loadChildren: () => import('./reporte/reporte.routes')
       },
     ]
   },
